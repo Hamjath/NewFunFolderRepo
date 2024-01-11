@@ -271,6 +271,9 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\Home\DashBorad.cshtml" />
+    <Content Include="Views\Home\addwork.cshtml" />
+    <Content Include="Views\Home\addproject.cshtml" />
     <None Include="Views\Home\Login.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -286,6 +289,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\report.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

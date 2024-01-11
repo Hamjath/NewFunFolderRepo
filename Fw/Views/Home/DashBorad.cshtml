@@ -1,0 +1,162 @@
+﻿
+@{
+    ViewBag.Title = "DashBorad";
+}
+<html>
+<h2>DashBorad</h2>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav {
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 5px 10px;
+            margin-right: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #45a049;
+            }
+
+        main {
+            padding: 20px;
+        }
+
+        table {
+            width: 75%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #logoutButton {
+            position: fixed;
+            bottom: 20px;
+            right: 140px;
+            /* Adjust the position as needed */
+            background-color: #dc3545;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            #logoutButton:hover {
+                background-color: #c82333;
+            }
+    </style>
+</head>
+<!-- Add your styles and head content here -->
+
+<body>
+    <header>
+        <h1>Time Tracker</h1>
+        <link rel="stylesheet" href="style1.css">
+        <nav>
+            <button id="btnHome" onclick="redirectTo(`addwork`)">Add Work</button>
+            <button id="btnTasks" onclick="redirectTo('addproject')">Add Project</button>
+            <button id="btnReports" onclick="redirectTo('report')">View Report</button>
+        </nav>
+    </header>
+
+    <main>
+        <table id="timeTable">
+            <thead>
+                <tr>
+                    <th>Project Name</th>
+                    <th>Project Description</th>
+                    <th>Hours Allocated</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example data -->
+                <tr>
+                    <td>Project ABC</td>
+                    <td>This is a sample project description.</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td>Project XYZ</td>
+                    <td>Another example project with a longer description for testing purposes.</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>Project 123</td>
+                    <td>Short description.</td>
+                    <td>25</td>
+                </tr>
+                <!-- Add more rows with example data -->
+            </tbody>
+        </table>
+    </main>
+    <button id="logoutButton" onclick="logout()">Logout</button>
+    <script >
+        document.addEventListener("DOMContentLoaded", function () {
+            // Fetch data from the backend API
+            fetchDataFromBackend('your_backend_api_url')
+                .then(data => populateTable(data))
+                .catch(error => console.error('Error fetching data:', error));
+        });
+
+        function fetchDataFromBackend(apiUrl) {
+            return fetch(apiUrl)
+                .then(response => response.json());
+        }
+
+        function populateTable(data) {
+            const tableBody = document.querySelector('#timeTable tbody');
+
+            // Clear existing rows
+            tableBody.innerHTML = '';
+
+            // Populate the table with data from the backend
+            data.forEach(entry => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+            <td>${entry.projectName}</td>
+            <td>${entry.projectDescription}</td>
+            <td>${entry.hoursAllocated}</td>
+        `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function redirectTo(page) {
+            // Redirect to the specified HTML page
+            window.location.href = page;
+        }
+    </script>
+</body>
+
+</html>

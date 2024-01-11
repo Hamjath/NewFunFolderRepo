@@ -1,0 +1,181 @@
+﻿
+@{
+    ViewBag.Title = "report";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Time Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav {
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 5px 10px;
+            margin-right: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #45a049;
+            }
+
+        main {
+            padding: 20px;
+        }
+
+        table {
+            width: 75%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #logoutButton {
+            position: fixed;
+            bottom: 20px;
+            right: 140px;
+            /* Adjust the position as needed */
+            background-color: #dc3545;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            #logoutButton:hover {
+                background-color: #c82333;
+            }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Reports - Time Tracker</h1>
+        <nav>
+            <a href="dashboard.html">Back</a>
+        </nav>
+    </header>
+
+    <main id="mainContent">
+        <div id="reportOptions">
+            <label for="timeInterval">Select Time Interval:</label>
+            <select id="timeInterval">
+                <option value="weekly" selected>Weekly</option>
+                <option value="monthly">Monthly</option>
+            </select>
+        </div>
+
+        <table id="reportsTable">
+            <thead>
+                <tr>
+                    <th>Project ID</th>
+                    <th>Project Name</th>
+                    <th>Time Spent (hours)</th>
+                    <th>Date & Day</th>
+                    <th>Modify</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table content will be populated dynamically using JavaScript -->
+                <!-- Sample data -->
+                <tr>
+                    <td>1</td>
+                    <td>Project A</td>
+                    <td>10</td>
+                    <td>2022-01-01 & Monday</td>
+                    <td>
+                        <button onclick="modifyRow(1)">Modify</button>
+                        <button onclick="deleteRow(1)">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Project B</td>
+                    <td>15</td>
+                    <td>2022-01-05 & Tuesday</td>
+                    <td>
+                        <button onclick="modifyRow(2)">Modify</button>
+                        <button onclick="deleteRow(2)">Delete</button>
+                    </td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+
+        <button id="saveButton" onclick="saveData()">Save</button>
+    </main>
+
+    <button id="logoutButton" onclick="logout()">Logout</button>
+
+    <script > // reports-script.js
+
+        function modifyRow(rowId) {
+            // Load the modify-form.html content into the mainContent section
+            const mainContent = document.getElementById("mainContent");
+            mainContent.innerHTML = '<object type="text/html" data="modify-form.html" ></object>';
+        }
+
+        // Add these functions to your reports-script.js
+        function deleteRow(rowId) {
+            // Implement logic to delete the row with the given rowId
+            console.log('Delete row with ID:', rowId);
+        }
+
+        function populateTable(data) {
+            const tableBody = document.querySelector('#reportsTable tbody');
+
+            // Clear existing rows
+            tableBody.innerHTML = '';
+
+            // Populate the table with data from the backend
+            data.forEach(entry => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+            <td>${entry.projectId}</td>
+            <td>${entry.projectName}</td>
+            <td>${entry.timeSpent}</td>
+            <td>${entry.date}</td>
+            <td><button onclick="modifyRow('${entry.projectId}')">Modify</button></td>
+        `;
+                tableBody.appendChild(row);
+            });
+        }</script>
+</body>
+
+</html>
+
