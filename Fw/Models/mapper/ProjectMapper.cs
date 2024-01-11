@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System;
-using System.Data.SqlClient;
-using Fw.Models;
+﻿using System.Data.SqlClient;
+//using System;
+//using System.Data.SqlClient;
 
 
 namespace Fw.Models.mapper
